@@ -39,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             arg_list = arg.split(" ")
-            obj = eval(clsname)
+            obj = eval(clsname)()
             for v in range(1, len(arg_list)):
                 key, value = tuple(arg_list[v].split("="))
                 if value.startswith('"'):
