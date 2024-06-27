@@ -32,33 +32,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel"""
-        clsname = arg.split(" ")[0]
-        if not clsname:
+        if arg == "" or arg is None:
             print("** class name missing **")
-            return
-
-        if clsname not in storage.classes():
+        elif arg not in storage.classes():
             print("** class doesn't exist **")
-            return
-
-        arg_list = arg.split(" ")
-        obj = eval(clsname)()  # Instantiate the object
-
-        for v in range(1, len(arg_list)):
-            try:
-                key, value = tuple(arg_list[v].split("="))
-                if value.startswith('"') and value.endswith('"'):
-                    value = value.strip('"').replace("_", " ")
-                else:
-                    value = eval(value)
-
-                setattr(obj, key, value)
-            except (ValueError, SyntaxError):
-                print(f"** error setting attribute {key} **")
-
-        storage.new(obj)
-        print(obj.id)
-        obj.save()
+        else:
+            ob = storage.classes()[arg]()
+            ob.save()
+            print(ob.id)
 
     def do_show(self, arg):
         """Prints string representation of instance based on class name and id """
