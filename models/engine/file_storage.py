@@ -12,7 +12,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """returns the dictionary __objects"""
+        """returns the dictionary __objects if class has a value it returns by type"""
         if cls is None:
             return FileStorage.__objects
         else:
