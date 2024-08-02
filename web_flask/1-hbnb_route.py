@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-"""a script that starts a flask web application"""
+"""this is the same previose script but we gonna add some stuff"""
+
 from flask import Flask
 
 app = Flask(__name__)
 
+"""this return hello HBNB"""
+@app.route('/',strict_slashes=False)
+def index():
+    return "Hello HBNB"
 
-@app.route('/', strict_slashes=False)
-def hello_hbnb():
-"""a function that prints hello `hbnb at the root"""
-return "Hello HBNB!"
+"""this return HBNB"""
 
+@app.route('/hbnb',strict_slashes=False)
+def ShowHBNB():
+    return "HBNB"
 
-@app.route('/hbnb', strict_slashes=False)
-def hbnb():
-"""Display HBNB at /hbnb"""
-return "HBNB"
-
-
+"""our web application is listening on 0.0.0.0, port 5000"""
 if __name__ == "__main__":
-app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
