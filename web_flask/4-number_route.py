@@ -34,9 +34,9 @@ def python(text="is cool"):
     return f"Python {text}"
 
 
-@app.route('/number/<n>')
-def number():
-    return f"n is a number"
+@app.route('/number/<int:n>')
+def number(n):
+    return f"{n} is a number"
 
 
 if __name__ == "__main__":

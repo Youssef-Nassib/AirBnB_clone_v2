@@ -35,12 +35,12 @@ def python(text="is cool"):
 
 
 @app.route('/number/<int:n>')
-def number():
-    return f"n is a number"
+def number(n):
+    return f"{n} is a number"
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def display_HTML():
+def display_HTML(n):
     return render_template('templates/5-number.html')
 
 
