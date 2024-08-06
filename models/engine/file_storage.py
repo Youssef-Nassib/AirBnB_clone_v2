@@ -11,9 +11,12 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """returns the dictionary __objects"""
-        return FileStorage.__objects
+        if cls is None:
+            return FileStorage.__objects
+        cls_name = cls.__name__
+        return {k: v for k, v in FileStorage.__objects.items() if k.startswith(cls_name)}
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id."""
@@ -35,6 +38,13 @@ class FileStorage:
             objct_dict = {k: self.classes()[v["__class__"]](**v)
                         for k, v in objct_dict.items()}
             FileStorage.__objects = objct_dict
+
+    def delete(self, obj=None):
+        """Deletes obj from __objects if it's inside"""
+        if obj is not None:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            if key in FileStorage.__objects:
+                del FileStorage.__objects[key]
 
     def classes(self):
         """classes method returns dictionary of valid classes and their reference"""
