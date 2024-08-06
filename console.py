@@ -5,6 +5,8 @@ from models.base_model import BaseModel
 from models import storage
 import json
 import re
+import shlex
+import ast
 
 
 class HBNBCommand(cmd.Cmd):
@@ -35,32 +37,37 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
-    
+
         args = arg.split()
         class_name = args[0]
-        
+
         if class_name not in storage.classes():
             print("** class doesn't exist **")
             return
-        
+
         new_instance = storage.classes()[class_name]()
-        
+
         for param in args[1:]:
             if '=' not in param:
                 continue
+
             key, value = param.split('=', 1)
-            
+
             if value.startswith('"') and value.endswith('"'):
                 value = value[1:-1].replace('_', ' ').replace('\\"', '"')
-            elif '.' in value and value.replace('.', '', 1).isdigit():
-                value = float(value)
-            elif value.isdigit() or (value[0] == '-' and value[1:].isdigit()):
-                value = int(value)
+            elif '.' in value:
+                try:
+                    value = float(value)
+                except ValueError:
+                    continue
             else:
-                continue
-            
+                try:
+                    value = int(value)
+                except ValueError:
+                    continue
+
             setattr(new_instance, key, value)
-            
+
         new_instance.save()
         print(new_instance.id)
 
