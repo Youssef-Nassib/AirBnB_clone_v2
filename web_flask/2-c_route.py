@@ -6,20 +6,26 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/',strict_slashes=False)
-
 """this return hello HBNB"""
+
+
+@app.route('/', strict_slashes=False)
 def index():
-    return "Hello HBNB"
+    return "Hello HBNB!"
+
 
 """this return HBNB """
-@app.route('/hbnb',strict_slashes=False)
-def showHBNB:
+
+
+@app.route('/hbnb', strict_slashes=False)
+def showHBNB():
     return "HBNB"
+
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
-    """display “C ” followed by the value of the text variable(replace underscore _ symbols with a space"""
+    """display “C ” followed by the value of the text variable
+    replace underscore _ symbols with a space"""
     text = text.replace("_", " ")
     return "C {}".format(text)
 
