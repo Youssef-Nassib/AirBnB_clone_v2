@@ -5,6 +5,7 @@ from fabric.api import env, local, run, lcd, cd
 
 env.hosts = ["18.234.249.140", "3.80.18.45"]
 
+
 def do_clean(number=0):
     """Delete out-of-date archives.
 
