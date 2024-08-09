@@ -1,32 +1,4 @@
-<<<<<<< HEAD
-#!/bin/usr/python3
-
-from flask import Flask
-
-app = Flask(__name__)
-
-
-@app.route('/', strict_slashes=False)
-def index():
-    """function that print hello HBNB"""
-    return "Hello HBNB!"
-
-@app.route('/hbnb', strict_slashes=False)
-def HBNB():
-    """function that display HBNB"""
-    return "HBNB"
-
-@app.route('/c/<text>', strict_slashes=False)
-def C(text):
-    """display C followed by the value of the text variables"""
-    text = text.replace("_", " ")
-    return "C {}".format(text)
-
-@app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-=======
 #!/usr/bin/python3
-"""a script that starts a flask web application"""
 from flask import Flask
 
 app = Flask(__name__)
@@ -34,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def index():
-    """a function that prints hello `hbnb at the root"""
+    """A function that prints hello HBNB at the root"""
     return "Hello HBNB!"
 
 
@@ -46,8 +18,8 @@ def indexhbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def indexc(text):
-    """display “C ” followed by the value of the text variable
-    (replace underscore _ symbols with a space"""
+    """Display “C ” followed by the value of the text variable,
+    replacing underscore _ symbols with a space"""
     text = text.replace("_", " ")
     return "C {}".format(text)
 
@@ -55,12 +27,11 @@ def indexc(text):
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python(text="is cool"):
-    """ display python followed by the value of the text
-    variable and replaces _ with space"""
+    """Display Python followed by the value of the text
+    variable, replacing _ with space"""
     text = text.replace("_", " ")
     return f"Python {text}"
 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
->>>>>>> c375d3ab423c0e1806ecb7838740d572f6837f8a
