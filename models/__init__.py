@@ -4,6 +4,7 @@ import os
 
 storage = None
 
+
 def initialize_storage():
     global storage
     HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
@@ -17,6 +18,6 @@ def initialize_storage():
 
     storage.reload()
 
+
 # Call the function to initialize storage
 initialize_storage()
-
