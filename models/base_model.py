@@ -8,7 +8,6 @@ from models import storage
 
 Base = declarative_base()
 
-
 class BaseModel:
     """the base class"""
 
@@ -26,11 +25,9 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at":
-                    self.created_at = datetime.strptime(value,
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                    self.created_at = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key == "updated_at":
-                    self.updated_at = datetime.strptime(value,
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                    self.updated_at = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key != "__class__":
                     setattr(self, key, value)
             if 'id' not in kwargs:
@@ -47,8 +44,7 @@ class BaseModel:
     def __str__(self):
         """function that returns string representation"""
 
-        return ("[{}] ({}) {}".format(type(self).__name__,
-                                      self.id, self.__dict__))
+        return ("[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__))
 
     def save(self):
         """updates the public instance attribute with the current datetime"""

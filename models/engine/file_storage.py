@@ -7,8 +7,7 @@ import os
 
 class FileStorage:
 
-    """FileStorage class serializes instances
-    to a JSON file and deserializes JSON file to instances"""
+    """FileStorage class serializes instances to a JSON file and deserializes JSON file to instances"""
     __file_path = "file.json"
     __objects = {}
 
@@ -17,8 +16,7 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
         cls_name = cls.__name__
-        return {k: v for k, v in FileStorage.
-                __objects.items() if k.startswith(cls_name)}
+        return {k: v for k, v in FileStorage.__objects.items() if k.startswith(cls_name)}
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id."""
@@ -28,8 +26,7 @@ class FileStorage:
     def save(self):
         """serializes __objects to JSON file"""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            dt = {k: value.to_dict() for k, value in FileStorage.
-                  __objects.items()}
+            dt = {k: value.to_dict() for k, value in FileStorage.__objects.items()}
             json.dump(dt, f)
 
     def reload(self):
@@ -38,8 +35,8 @@ class FileStorage:
             return
         with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
             objct_dict = json.load(f)
-            objct_dict = {k: self.classes()
-                          [v["__class__"]](**v)for k, v in objct_dict.items()}
+            objct_dict = {k: self.classes()[v["__class__"]](**v)
+                        for k, v in objct_dict.items()}
             FileStorage.__objects = objct_dict
 
     def delete(self, obj=None):
@@ -49,9 +46,12 @@ class FileStorage:
             if key in FileStorage.__objects:
                 del FileStorage.__objects[key]
 
+    def close(self):
+        """calls reload() for deserializing the JSON file to objects"""
+        self.reload()
+
     def classes(self):
-        """classes method returns
-        dictionary of valid classes and their reference"""
+        """classes method returns dictionary of valid classes and their reference"""
         from models.base_model import BaseModel
         from models.user import User
         from models.city import City
@@ -70,8 +70,7 @@ class FileStorage:
         return classes
 
     def attributes(self):
-        """attributes method returns the
-        valid attributes and their types for classname"""
+        """attributes method returns the valid attributes and their types for classname"""
         attributes = {
             "BaseModel":
                      {"id": str,
@@ -107,7 +106,3 @@ class FileStorage:
                       "text": str}
         }
         return attributes
-
-    def close(self):
-        """Call the reload method."""
-        self.reload()

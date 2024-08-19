@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 
-
 class DBStorage:
     """DBStorage class"""
 
@@ -21,9 +20,7 @@ class DBStorage:
         HBNB_ENV = os.getenv('HBNB_ENV')
 
         self.__engine = create_engine(
-            f'mysql+mysqldb: // {HBNB_MYSQL_USER}:
-            {HBNB_MYSQL_PWD} @ {HBNB_MYSQL_HOST}
-            / {HBNB_MYSQL_DB}',
+            f'mysql+mysqldb://{HBNB_MYSQL_USER}:{HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/{HBNB_MYSQL_DB}',
             pool_pre_ping=True
         )
 
@@ -31,8 +28,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """Query on the current database session all
-        objects depending on the class name"""
+        """Query on the current database session all objects depending on the class name"""
         from models.state import State
         from models.city import City
         from models.user import User
@@ -79,11 +75,10 @@ class DBStorage:
         from models.amenity import Amenity
 
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.
-                                       __engine, expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
 
     def close(self):
-        """close the working SQLAlchemy session."""
+        """call close on private session"""
         self.__session.close()
