@@ -102,3 +102,7 @@ class FileStorage:
                       "text": str}
         }
         return attributes
+    
+    def close(self):
+        """Call the reload method."""
+        self.reload()
