@@ -1,39 +1,48 @@
-The AirBnB Clone Project is a Python-based project that simulates the backend of the AirBnB website. It includes a command-line interface (CLI) where users can interact with the backend functionalities. Here's a breakdown of the project components and how to use them:
+# Project Title
 
-#Project Components:
+## Introduction
 
-console.py: This is the main executable of the project, serving as the command interpreter. models/engine/file_storage.py: Manages serialization of instances to a JSON file and deserialization from JSON to instances. models/init.py: Initializes a unique FileStorage instance for the application. models/base_model.py: Defines common attributes/methods for other classes. models/user.py: Represents the User class which inherits from BaseModel. models/state.py: Represents the State class which inherits from BaseModel. models/city.py: Represents the City class which inherits from BaseModel. models/amenity.py: Represents the Amenity class which inherits from BaseModel. models/place.py: Represents the Place class which inherits from BaseModel. models/review.py: Represents the Review class which inherits from BaseModel.
+In the industry, you will work on an existing codebase 90% of the time. Your first thoughts upon looking at it might include:
 
-#Usage Modes:
+- “Who did this code?”
+- “How does it work?”
+- “Where are unittests?”
+- “Where is this?”
+- “Why did they do that like this?”
+- “I don’t understand anything.”
+- “… I will refactor everything…”
 
-*/Interactive Mode: Users can input commands directly into the console. After executing a command, the prompt appears again, awaiting further input. */Non-interactive Mode: Commands can be piped into the shell's execution. In this mode, no prompt appears, and commands are executed immediately.
+But the worst thing you could possibly do is to redo everything. Please don’t do that! Note: the existing codebase might be perfect, or it might have errors. Don’t always trust the existing codebase!
 
-#Format of Command Input:
+## Project Setup
 
-Commands should be separated by spaces. In non-interactive mode, commands need to be piped through an echo. Interactive mode allows direct keyboard input.
+You will fork this codebase:
 
-#Available Commands:
+- Update the repository name to `AirBnB_clone_v2`
+- Update the `README.md` with your information but don’t delete the initial authors
 
-quit or EOF: Exits the program. help: Provides information about command usage. create: Creates a new instance of a valid class (e.g., BaseModel, User) and saves it to the JSON file. show: Prints the string representation of an instance based on class name and ID. destroy: Deletes an instance based on class name and ID and saves the changes into the JSON file. all: Prints string representations of all instances based on class name. update: Updates an instance's attribute based on class name and ID and saves changes to the JSON file. count: Retrieves the number of instances of a class.
+If you are the owner of this repository, please create a new repository named `AirBnB_clone_v2` with the same content as `AirBnB_clone`.
 
-#How to Start:
+### Repository:
 
-Clone the repository from GitHub: git clone https://github.com/Bbr011/AirBnB_clone.git Navigate to the cloned directory: cd AirBnB_clone Run the console program: ./console.py
+- **GitHub repository:** AirBnB_clone_v2
 
-#Examples: */Interactive Mode:
+## Tasks
 
-$ ./console.py (hbnb) help
+### 1. Bug Free
 
-EOF help quit
+**Score: 9.03% (Checks completed: 13.89%)**
 
-(hbnb) (hbnb) (hbnb) quit $
+All your unittests must pass without any errors at any time in this project, with each storage engine! Same for PEP8!
 
-*/Non-interactive Mode:
+To test with MySQL:
 
-$ echo "help" | ./console.py (hbnb)
+1. Create a specific database.
+2. Validate actions by comparing states before and after.
 
-EOF help quit (hbnb) $ $ cat test_help help $ $ cat test_help | ./console.py (hbnb)
+Example:
 
-EOF help quit (hbnb) $
+```python
+import MySQLdb
 
-This setup allows users to interact with the backend functionalities of the AirBnB Clone Project, facilitating actions such as creating, updating, and deleting instances, as well as retrieving counts and representations of instances.
+# Your code to interact with MySQL
